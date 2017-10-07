@@ -30,27 +30,18 @@ export default class RealtimeAttentionChart extends Component {
     socket.onmessage = (event) => {
       const data = JSON.parse(event.data);
       console.log(data);
-      if (data.attention) {
-        this.setState({
-          attention: data.attention,
-          attentionHistory: _.concat(this.state.attentionHistory, parseInt(data.attention, 10)),
-        });
-      }
-
-      if (data.attention_raw) {
-        this.setState({
-          attentionRaw: data.attention_raw,
-          attentionRawHistory: _.concat(this.state.attentionRawHistory, parseInt(data.attention_raw, 10)),
-        });
-      }
-
-      if (data.beta) {
-        this.setState({
-          beta: data.beta,
-          betaHistory: _.concat(this.state.betaHistory, parseInt(data.beta, 10)),
-        });
-      }
-    }
+      const attention = data.attention || 0;
+      const attentionRaw = data.attention_raw || 0;
+      const beta = data.betaHistory || 0;
+      this.setState({
+        attention,
+        attentionHistory: _.concat(this.state.attentionHistory, parseInt(attention, 10)),
+        attentionRaw,
+        attentionRawHistory: _.concat(this.state.attentionRawHistory, parseInt(attentionRaw, 10)),
+        beta,
+        betaHistory: _.concat(this.state.betaHistory, parseInt(beta, 10)),
+      });
+    };
   }
 
 
