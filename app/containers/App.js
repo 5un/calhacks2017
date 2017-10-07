@@ -27,7 +27,10 @@ export default class App extends Component {
 
     return (
       <div className={style.normal}>
+        <h2>Neurosky Test</h2>
+        {/*
         <Header addTodo={actions.addTodo} />
+        */}
         {/*
           <MainSection todos={todos} actions={actions} />
         */}

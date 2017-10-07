@@ -13,7 +13,9 @@ export default class RealtimeAttentionChart extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = { 
-      attentionHistory: []
+      attentionHistory: [],
+      attentionRawHistory: [],
+      betaHistory: [],
     };
   }
 
@@ -26,26 +28,52 @@ export default class RealtimeAttentionChart extends Component {
     };
 
     socket.onmessage = (event) => {
-      const data = JSON.parse(event.data)
+      const data = JSON.parse(event.data);
       console.log(data);
       if (data.attention) {
-        this.setState({ 
+        this.setState({
           attention: data.attention,
-          attentionHistory: _.concat(this.state.attentionHistory, parseInt(data.attention, 10))
-        })
+          attentionHistory: _.concat(this.state.attentionHistory, parseInt(data.attention, 10)),
+        });
+      }
+
+      if (data.attention_raw) {
+        this.setState({
+          attentionRaw: data.attention_raw,
+          attentionRawHistory: _.concat(this.state.attentionRawHistory, parseInt(data.attention_raw, 10)),
+        });
+      }
+
+      if (data.beta) {
+        this.setState({
+          beta: data.beta,
+          betaHistory: _.concat(this.state.betaHistory, parseInt(data.beta, 10)),
+        });
       }
     }
   }
 
 
   render() {
-    const { attention, attentionHistory } = this.state;
+    const { attention, attentionRaw, beta, attentionHistory, 
+      attentionRawHistory, betaHistory 
+    } = this.state;
     return (
       <section>
         <h2>Attention</h2>
-        <div>{attentionHistory.join(',')}</div>
+        <div>Attention: {attention}</div>
         <Sparklines data={attentionHistory} limit={20}>
           <SparklinesLine color="#1c8cdc" />
+          <SparklinesSpots />
+        </Sparklines>
+        <div>Attention Raw: {attentionRaw}</div>
+        <Sparklines data={attentionRawHistory} limit={20}>
+          <SparklinesLine color="green" />
+          <SparklinesSpots />
+        </Sparklines>
+        <div>Beta: {beta}</div>
+        <Sparklines data={betaHistory} limit={20}>
+          <SparklinesLine color="red" />
           <SparklinesSpots />
         </Sparklines>
       </section>

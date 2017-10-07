@@ -1,8 +1,11 @@
 TODO
 ====
-* url heck
-* dom manipulation test 
-* connect to persistent storage
+* [DONE] dom manipulation test 
+* connect to persistent storage, google cloud functions, mLab
+* full visualization page for chrome extension
+* algo for 
+* admin site?
+* face tracking test?
 
 
 Cool challenges
