@@ -1,0 +1,18 @@
+TODO
+====
+* url heck
+* dom manipulation test 
+* connect to persistent storage
+
+
+Cool challenges
+---------------
+* Cisco Sparks
+  * Video SDK JS
+* BlackRock
+  * See how well your portfolio is doing
+  * curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET "https://www.blackrock.com/tools/hackathon/portfolio-analysis?positions=BLK~25|AAPL~25|IXN~25|MALOX~25"
+
+* Skydeck
+* Gnosis
+  * Build the wor'ds most efficient forecasting tool
