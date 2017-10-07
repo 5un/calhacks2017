@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
 import MainSection from '../components/MainSection';
+import RealtimeAttentionChart from '../components/RealtimeAttentionChart'
 import * as TodoActions from '../actions/todos';
 import style from './App.css';
 
@@ -27,8 +28,10 @@ export default class App extends Component {
     return (
       <div className={style.normal}>
         <Header addTodo={actions.addTodo} />
-        <div>yo</div>
-        <MainSection todos={todos} actions={actions} />
+        {/*
+          <MainSection todos={todos} actions={actions} />
+        */}
+        <RealtimeAttentionChart />
       </div>
     );
   }

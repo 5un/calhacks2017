@@ -17,11 +17,13 @@ export default class Header extends Component {
     return (
       <header>
         <h1>Neurono</h1>
+        {/*
         <TodoTextInput
           newTodo
           onSave={this.handleSave}
           placeholder="What needs to be done?"
         />
+        */}
       </header>
     );
   }

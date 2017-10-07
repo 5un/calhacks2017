@@ -21,9 +21,12 @@
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["content-scripts/jquery-3.2.1.min.js", "content-scripts/content.js"]
+      "js": [
+        "content-scripts/jquery-3.2.1.min.js",
+        "content-scripts/content.js"
+      ]
     }
   ],
   "permissions": [ "contextMenus", "management", "tabs", "storage", "https://github.com/*" ],
-  "content_security_policy": "default-src 'self'; script-src 'self' http://localhost:3000 https://localhost:3000 'unsafe-eval'; connect-src http://localhost:3000 https://localhost:3000; style-src * 'unsafe-inline' 'self' blob:; img-src 'self' data:;"
+  "content_security_policy": "default-src 'self'; script-src 'self' http://localhost:3000 https://localhost:3000 'unsafe-eval'; connect-src http://localhost:3000 https://localhost:3000 wss://246b33f7.ngrok.io; style-src * 'unsafe-inline' 'self' blob:; img-src 'self' data:;"
 }
