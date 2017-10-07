@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gcf-create-bucket": "gsutil mb -p mehsurvey-29210 gs://calhacks2017",
+    "gcf-deploy-function": "gcloud beta functions deploy summarizeText --stage-bucket calhacks2017 --trigger-http --project mehsurvey-29210",
+    "gcf-logs": "gcloud beta functions logs read summarizeText --project mehsurvey-29210"
   },
   "author": "",
   "license": "ISC",
