@@ -54,17 +54,17 @@ export default class RealtimeAttentionChart extends Component {
         <h2>Attention</h2>
         <div>Attention: {attention}</div>
         <Sparklines data={attentionHistory} limit={20}>
-          <SparklinesLine color="#1c8cdc" />
+          <SparklinesLine color="rgb(255,255,255)" />
           <SparklinesSpots />
         </Sparklines>
         <div>Attention Raw: {attentionRaw}</div>
         <Sparklines data={attentionRawHistory} limit={20}>
-          <SparklinesLine color="green" />
+          <SparklinesLine color="rgb(255,255,255)" />
           <SparklinesSpots />
         </Sparklines>
         <div>Beta: {beta}</div>
         <Sparklines data={betaHistory} limit={20}>
-          <SparklinesLine color="red" />
+          <SparklinesLine color="rgb(255,255,255)" />
           <SparklinesSpots />
         </Sparklines>
       </section>

@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
+import PopupHeader from '../components/PopupHeader';
 import MainSection from '../components/MainSection';
 import RealtimeAttentionChart from '../components/RealtimeAttentionChart';
 import FooterButtonBar from '../components/FooterButtonBar';
@@ -46,9 +47,8 @@ export default class App extends Component {
         }
         {(environment === 'popup') &&
           <PopupContainer>
-            <h2>Neurosky</h2>
+            <PopupHeader />
             <RealtimeAttentionChart />
-            <FooterButtonBar />
           </PopupContainer>
         }   
       </div>

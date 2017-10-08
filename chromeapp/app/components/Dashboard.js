@@ -7,7 +7,7 @@ import { AreaChart, defs, linearGradient, stop, XAxis, YAxis, CartesianGrid, Too
 import DashboardNav from './DashboardNav'
 
 const DashboardContainer = styled.section`
-
+  margin-top: -20px;
 `;
 
 const VisualizationContainer = styled.div`

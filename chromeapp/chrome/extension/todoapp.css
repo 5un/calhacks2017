@@ -1,7 +1,6 @@
 html, body {
   margin: 0;
   padding: 0;
-  
 }
 
 button {
@@ -25,7 +24,7 @@ body {
   color: #4d4d4d;
   min-width: 230px;
   /* max-width: 550px; */
-  margin: 0 auto;
+  margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
   -ms-font-smoothing: antialiased;

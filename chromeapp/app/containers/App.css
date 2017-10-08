@@ -27,7 +27,6 @@
 }
 
 .normal h1 {
-  position: absolute;
   width: 100%;
   -webkit-text-rendering: optimizeLegibility;
   -moz-text-rendering: optimizeLegibility;
