@@ -63,21 +63,28 @@ export default class Dashboard extends Component {
           name: "GIPHY",
           avg: "22"
         }
+      ],
+      currentActivities: [
+        { name: 'Read', attention: 4000, focus: 2400, amt: 2400 },
+        { name: 'Read nyt.com', attention: 3000, focus: 1398, amt: 2210 },
+        { name: 'Facebook', attention: 2000, focus: 9800, amt: 2290 },
+        { name: 'Doing math', attention: 2780, focus: 3908, amt: 2000 },
+        { name: 'Facebook', attention: 1890, focus: 4800, amt: 2181 },
+        { name: 'Read Kafka', attention: 2390, focus: 3800, amt: 2500 },
+        { name: 'Read 61B', attention: 3490, focus: 4300, amt: 2100 },
       ]
     };
   }
 
+  componentDidMount() {
+    // setTimeout(() => {
+    //   console.log('newDataPoint')
+    //   const newDataPoint = { name: 'Read2', attention: 3000, focus: 4300, amt: 2100 };
+    //   this.setState({ currentActivities: _.concat(this.state.currentActivities, newDataPoint) });
+    // }, 2000);
+  }
+
   render() {
-    // const {} = this.state;
-    const data = [
-      { name: 'Read', attention: 4000, focus: 2400, amt: 2400 },
-      { name: 'Read nyt.com', attention: 3000, focus: 1398, amt: 2210 },
-      { name: 'Facebook', attention: 2000, focus: 9800, amt: 2290 },
-      { name: 'Doing math', attention: 2780, focus: 3908, amt: 2000 },
-      { name: 'Facebook', attention: 1890, focus: 4800, amt: 2181 },
-      { name: 'Read Kafka', attention: 2390, focus: 3800, amt: 2500 },
-      { name: 'Read 61B', attention: 3490, focus: 4300, amt: 2100 },
-    ];
 
     const dataPreviousSession = [
       { name: '1', attention: 4000 },
@@ -124,7 +131,7 @@ export default class Dashboard extends Component {
       { time: '1a', attention: 9 },
     ];
 
-    const { lowFocusActivities, highFocusActivities } = this.state;
+    const { lowFocusActivities, highFocusActivities, currentActivities } = this.state;
     const currentSessionDuration = '2:31:05';
     const currentAverage = 76;
 
@@ -133,30 +140,36 @@ export default class Dashboard extends Component {
         <DashboardNav />
         <VisualizationContainer>
           <Row style={{ marginBottom: '10px' }}>
-            <Col>
-              <h2>Attention</h2>
-              <AreaChart width={820} height={300} data={data}
-                margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-                <defs>
-                  <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-                    <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
-                  </linearGradient>
-                  <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
-                    <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
-                  </linearGradient>
-                </defs>
-                <XAxis dataKey="name" />
-                {/* <YAxis /> */}
-                {/* <CartesianGrid strokeDasharray="3 3" /> */}
-                <Tooltip />
-                <Area type="monotone" dataKey="attention" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
-                <Area type="monotone" dataKey="focus" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
-              </AreaChart>
+            <Col style={{ marginRight: '20px' }}>
+              <DBBox>
+                <DBBoxHeader>
+                  <H2>Attention</H2>
+                </DBBoxHeader>
+                <DBBoxBody>
+                  <AreaChart width={800} height={300} data={currentActivities}
+                    margin={{ top: 10, right: 30, left: 0, bottom: 0 }} >
+                    <defs>
+                      <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+                        <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+                      </linearGradient>
+                      <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
+                        <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
+                      </linearGradient>
+                    </defs>
+                    <XAxis dataKey="name" />
+                    {/* <YAxis /> */}
+                    {/* <CartesianGrid strokeDasharray="3 3" /> */}
+                    <Tooltip />
+                    <Area type="monotone" dataKey="attention" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
+                    <Area type="monotone" dataKey="focus" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
+                  </AreaChart>
+                </DBBoxBody>
+              </DBBox>
             </Col>
             <Col>
-              <DBBox>
+              <DBBox style={{ width: '330px' }}>
                 <DBBoxHeader>
                   <H2>Activities during high focus</H2>
                 </DBBoxHeader>
@@ -177,13 +190,19 @@ export default class Dashboard extends Component {
           </Row>
           <Row>
             <Col style={{ marginRight: '20px' }}>
-              <h2>Previous Sessions</h2>
-              <BarChart width={580} height={200} data={dataPreviousSession}>
-                <XAxis dataKey="name" />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="attention" fill="#8884d8" />
-              </BarChart>
+              <DBBox>
+                <DBBoxHeader>
+                  <H2>Previous Sessions</H2>
+                </DBBoxHeader>
+                <DBBoxBody>
+                  <BarChart width={580} height={200} data={dataPreviousSession}>
+                    <XAxis dataKey="name" />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey="attention" fill="#8884d8" />
+                  </BarChart>
+                </DBBoxBody>
+              </DBBox>
             </Col>
             <Col style={{ marginRight: '20px' }}>
               <DBBox style={{ width: '200px' }}>

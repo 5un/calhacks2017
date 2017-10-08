@@ -2,7 +2,7 @@ TODO
 ====
 
 * [DONE] Centralized websocket connection
-* Finish dashboard mock ***
+* [DONE] Finish dashboard mock ***
 * Google nat lang API ***
 * connect with ML model! ***
 * realtime chart in dashboard

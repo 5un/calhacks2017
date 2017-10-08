@@ -24,11 +24,11 @@ export default class ActivityList extends Component {
         {_.map(activities, (activity) => (
           <ActivityItem>
             <Row>
-              <Col>
+              <Col style={{ width: '80%' }}>
                 {activity.name}
               </Col>
-              <Col>
-                {activity.hours}
+              <Col style={{ textAlign: 'right', width: '20%' }}>
+                {activity.avg}
               </Col>
             </Row>
           </ActivityItem>
