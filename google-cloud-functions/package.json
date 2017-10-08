@@ -12,6 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aylien_textapi": "^0.6.0"
+    "@google-cloud/language": "^0.12.1",
+    "aylien_textapi": "^0.6.0",
+    "bluebird": "^3.5.1"
   }
 }
