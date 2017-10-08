@@ -31,6 +31,8 @@ const Branding = styled.h1`
   color: white !important;
   float: left;
   font-size: 18px;
+  margin-top: 28px;
+  letter-spacing: 10px;
 `;
 
 export default class Dashboard extends Component {

@@ -5,9 +5,14 @@ import Header from '../components/Header';
 import MainSection from '../components/MainSection';
 import RealtimeAttentionChart from '../components/RealtimeAttentionChart';
 import FooterButtonBar from '../components/FooterButtonBar';
-import Dashboard from '../components/Dashboard'
+import Dashboard from '../components/Dashboard';
 import * as TodoActions from '../actions/todos';
 import style from './App.css';
+import styled from 'styled-components';
+
+const PopupContainer = styled.div`
+  padding: 20px;
+`
 
 @connect(
   state => ({
@@ -28,9 +33,6 @@ export default class App extends Component {
   render() {
     const { todos, actions, environment } = this.props;
 
-    console.log(chrome.windows);
-    console.log(chrome.windows.getCurrent);
-
     return (
       <div className={style.normal}>
         {/*
@@ -43,13 +45,12 @@ export default class App extends Component {
           <Dashboard />
         }
         {(environment === 'popup') &&
-          <div>
-            <h2>Neurosky: {environment}</h2>
+          <PopupContainer>
+            <h2>Neurosky</h2>
             <RealtimeAttentionChart />
             <FooterButtonBar />
-          </div>
-        }
-        
+          </PopupContainer>
+        }   
       </div>
     );
   }
