@@ -2,8 +2,8 @@ var wsPorts = [];
 var mindwaveState = {
   connected: false
 };
-var socket = new WebSocket('wss://4e1d9385.ngrok.io');
-// var socket = new WebSocket('ws://localhost:8080');
+// var socket = new WebSocket('wss://4e1d9385.ngrok.io');
+var socket = new WebSocket('ws://localhost:8080');
 
 socket.onopen = (event) => {
   console.log('socket open');
@@ -12,6 +12,7 @@ socket.onopen = (event) => {
 
 socket.onmessage = (event) => {
   const data = JSON.parse(event.data);
+  console.log(data);
   for (var i in wsPorts) {
     var wsPort = wsPorts[i];
     wsPort.postMessage({ ...data, event: 'sensorData' });
@@ -25,13 +26,13 @@ chrome.runtime.onConnect.addListener(function(port) {
   wsPorts.push(port);
   port.onDisconnect.addListener(function (sender) {
     var portIndex = -1;
-    for(var i = 0; i < wsPorts.length; i++) {
-      if(sender == wsPorts[i]) {
+    for (var i = 0; i < wsPorts.length; i++) {
+      if (sender == wsPorts[i]) {
         portIndex = i;
       }
     }
 
-    if(portIndex > -1) {
+    if (portIndex > -1) {
       wsPorts.splice(portIndex);
     }
     //TODO: remove itself from port list

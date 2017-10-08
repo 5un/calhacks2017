@@ -24,7 +24,7 @@ export default class RealtimeAttentionChart extends Component {
     port.onMessage.addListener((data) => {
       //const data = JSON.parse(event.data);
       const attention = data.attention || 0;
-      const attentionRaw = data.attention_raw || 0;
+      const attentionRaw = data.raw_attention || 0;
       const beta = data.beta || 0;
       this.setState({
         attention,

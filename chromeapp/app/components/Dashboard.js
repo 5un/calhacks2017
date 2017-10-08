@@ -6,6 +6,7 @@ import { AreaChart, defs, linearGradient, stop, XAxis, YAxis, CartesianGrid, Too
           BarChart, Legend, Bar, LineChart, Line } from 'recharts';
 import DashboardNav from './DashboardNav';
 import ActivityList from './ActivityList';
+import moment from 'moment';
 
 const DashboardContainer = styled.section`
   margin-top: -20px;
@@ -65,23 +66,55 @@ export default class Dashboard extends Component {
         }
       ],
       currentActivities: [
-        { name: 'Read', attention: 4000, focus: 2400, amt: 2400 },
-        { name: 'Read nyt.com', attention: 3000, focus: 1398, amt: 2210 },
-        { name: 'Facebook', attention: 2000, focus: 9800, amt: 2290 },
-        { name: 'Doing math', attention: 2780, focus: 3908, amt: 2000 },
-        { name: 'Facebook', attention: 1890, focus: 4800, amt: 2181 },
-        { name: 'Read Kafka', attention: 2390, focus: 3800, amt: 2500 },
-        { name: 'Read 61B', attention: 3490, focus: 4300, amt: 2100 },
-      ]
+        { name: 'Read', attention: 40, focus: 24 },
+        { name: 'Read nyt.com', attention: 30, focus: 13 },
+        { name: 'Facebook', attention: 20, focus: 98 },
+        { name: 'Doing math', attention: 27, focus: 39 },
+        { name: 'Facebook', attention: 18, focus: 48 },
+        { name: 'Read Kafka', attention: 23, focus: 38 },
+        { name: 'Read 61B', attention: 34, focus: 43 },
+      ],
+      currentSessionDuration: 0
     };
   }
 
+  extractHostname(url) {
+    let hostname;
+    if (url.indexOf("://") > -1) {
+      hostname = url.split('/')[2];
+    } else {
+      hostname = url.split('/')[0];
+    }
+    hostname = hostname.split(':')[0];
+    hostname = hostname.split('?')[0];
+    return hostname;
+  }
+
   componentDidMount() {
-    // setTimeout(() => {
-    //   console.log('newDataPoint')
-    //   const newDataPoint = { name: 'Read2', attention: 3000, focus: 4300, amt: 2100 };
-    //   this.setState({ currentActivities: _.concat(this.state.currentActivities, newDataPoint) });
-    // }, 2000);
+
+    chrome.tabs.onActivated.addListener(activeInfo => {
+      console.log(activeInfo);
+      chrome.tabs.get(activeInfo.tabId, (tab) => {
+        const host = this.extractHostname(tab.url);
+        const newDataPoint = { name: host, attention: this.state.attention || 0, focus: Math.random() * 100, amt: 2100 };
+        this.setState({ currentActivities: _.concat(this.state.currentActivities, newDataPoint) });
+      });
+    });
+
+    setInterval(() => {
+      this.setState({ currentSessionDuration: this.state.currentSessionDuration + 1 });
+    }, 1000);
+
+    const port = chrome.runtime.connect({ name: 'knockknock2' });
+    port.onMessage.addListener((data) => {
+      //const data = JSON.parse(event.data);
+      const attention = data.attention || 0;
+      const attentionRaw = data.raw_attention || 0;
+      const beta = data.beta || 0;
+      if(attention > 0) {
+        this.setState({ attention });
+      }
+    });
   }
 
   render() {
@@ -131,9 +164,17 @@ export default class Dashboard extends Component {
       { time: '1a', attention: 9 },
     ];
 
-    const { lowFocusActivities, highFocusActivities, currentActivities } = this.state;
-    const currentSessionDuration = '2:31:05';
-    const currentAverage = 76;
+    const { lowFocusActivities, highFocusActivities, currentActivities, currentSessionDuration, attention } = this.state;
+    const currentAverage = attention;
+    console.log(moment);
+    console.log(window.moment);
+    
+    let totalSeconds = currentSessionDuration;
+    const hours = Math.floor(totalSeconds / 3600);
+    totalSeconds %= 3600;
+    const minutes = ("0" + Math.floor(totalSeconds / 60)).slice(-2);
+    const seconds = ("0" + Math.floor(totalSeconds % 60)).slice(-2);
+
 
     return (
       <DashboardContainer>
@@ -211,8 +252,7 @@ export default class Dashboard extends Component {
                 </DBBoxHeader>
                 <DBBoxBody>
                   <H3>Durtation</H3>
-                  <BigDigits>{currentSessionDuration}</BigDigits>
-
+                  <BigDigits>{hours}:{minutes}:{seconds}</BigDigits>
                   <H3>Average Attention</H3>
                   <BigDigits>{currentAverage}</BigDigits>
                 </DBBoxBody>
