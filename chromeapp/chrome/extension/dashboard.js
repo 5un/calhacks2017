@@ -10,7 +10,7 @@ chrome.storage.local.get('state', (obj) => {
   const createStore = require('../../app/store/configureStore');
 
   ReactDOM.render(
-    <Root store={createStore(initialState)} environment="popup"/>,
+    <Root store={createStore(initialState)} environment="dashboard"/>,
     document.querySelector('#root')
   );
 });

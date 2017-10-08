@@ -21,7 +21,7 @@ export default class RealtimeAttentionChart extends Component {
 
   componentDidMount() {
     const { attentionHistory } = this.state;
-    var socket = new WebSocket("wss://246b33f7.ngrok.io");
+    var socket = new WebSocket("wss://4e1d9385.ngrok.io");
     console.log(socket);
     socket.onopen = (event) => {
       console.log('socket open');

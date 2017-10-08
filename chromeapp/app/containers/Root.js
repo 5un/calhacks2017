@@ -5,14 +5,15 @@ import App from './App';
 export default class Root extends Component {
 
   static propTypes = {
-    store: PropTypes.object.isRequired
+    store: PropTypes.object.isRequired,
+    environment: PropTypes.string,
   };
 
   render() {
-    const { store } = this.props;
+    const { store, environment } = this.props;
     return (
       <Provider store={store}>
-        <App />
+        <App environment={environment} />
       </Provider>
     );
   }

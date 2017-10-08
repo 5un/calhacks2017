@@ -3,17 +3,18 @@ TODO
 * [DONE] dom manipulation test 
 * [DONE] fontsize
 
-* Usecase 1 change font size as you scroll
-* Usecase 2 Summarize paragraph as you scroll (but show a way to show orig)
+* [DONE] Usecase 1 change font size as you scroll
+* [DONE] Usecase 2 Summarize paragraph as you scroll (but show a way to show orig)
 * Usecase 3 modify image as you scroll
 * Usecase 4 modify video as you scroll
+
+* communicate with main page
 
 * connect to persistent storage, google cloud functions, mLab
 * full visualization page for chrome extension
 * algo for 
 * admin site?
 * face tracking test?
-
 
 Cool challenges
 ---------------

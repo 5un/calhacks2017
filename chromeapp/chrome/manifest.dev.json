@@ -23,6 +23,7 @@
       "matches": ["http://*/*", "https://*/*"],
       "js": [
         "content-scripts/jquery-3.2.1.min.js",
+        "content-scripts/api.js",
         "content-scripts/content.js"
       ]
     }
