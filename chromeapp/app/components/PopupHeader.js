@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import styled from 'styled-components';
-import { Button } from './Elements'
+import { Button } from './Elements';
 
 const AppIcon = styled.img`
   height: 50px;
@@ -24,6 +24,13 @@ export default class PopupHeader extends Component {
     }
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      domManipulationEnabled: false
+    };
+  }
+
   handleDashboardButtonClicked() {
     chrome.windows.create({
       type: 'panel',
@@ -31,13 +38,21 @@ export default class PopupHeader extends Component {
     });
   }
 
+  handleToggleSwitch() {
+    
+  }
+
   render() {
+    const { domManipulationEnabled } = this.state;
     return (
       <header>
         <TopRightButtons>
           <Button onClick={this.handleDashboardButtonClicked.bind(this)}>Dashboard</Button>
         </TopRightButtons>
         <h1><AppIcon src="/img/icon-brain.png" />FOCUS</h1>
+        <div>
+          <input type="checkbox" checked /><label>Enable Page Adaption</label>
+        </div>
       </header>
     );
   }

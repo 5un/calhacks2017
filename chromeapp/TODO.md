@@ -1,9 +1,16 @@
 TODO
 ====
 
-* Centralized websocket connection
-* realtime chart
-* DOM Maniputation On/off
+* [DONE] Centralized websocket connection
+* Finish dashboard mock ***
+* Google nat lang API ***
+* connect with ML model! ***
+* realtime chart in dashboard
+
+* [SKIP] DOM Maniputation On/off
+* mLab
+
+====
 
 * [DONE] dom manipulation test 
 * [DONE] fontsize
