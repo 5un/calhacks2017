@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import styled from 'styled-components'
-import _ from 'lodash'
-import { Row, Col } from './Elements'
-import Avatar from 'react-avatar'
+import styled from 'styled-components';
+import _ from 'lodash';
+import { Row, Col } from './Elements';
+import Avatar from 'react-avatar';
 
 const DashboardNavContainer = styled.section`
   background-color: rgba(255,255,255,0.1);

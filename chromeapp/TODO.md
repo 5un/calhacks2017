@@ -1,8 +1,12 @@
 TODO
 ====
+
+* Centralized websocket connection
+* realtime chart
+* DOM Maniputation On/off
+
 * [DONE] dom manipulation test 
 * [DONE] fontsize
-
 * [DONE] Usecase 1 change font size as you scroll
 * [DONE] Usecase 2 Summarize paragraph as you scroll (but show a way to show orig)
 * Usecase 3 modify image as you scroll
@@ -13,7 +17,7 @@ TODO
 * connect to persistent storage, google cloud functions, mLab
 * full visualization page for chrome extension
 * algo for 
-* admin site?
+* [DONE] admin site?
 * face tracking test?
 
 Cool challenges

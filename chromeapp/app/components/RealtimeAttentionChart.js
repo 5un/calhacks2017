@@ -20,19 +20,12 @@ export default class RealtimeAttentionChart extends Component {
   }
 
   componentDidMount() {
-    const { attentionHistory } = this.state;
-    var socket = new WebSocket("wss://4e1d9385.ngrok.io");
-    console.log(socket);
-    socket.onopen = (event) => {
-      console.log('socket open');
-    };
-
-    socket.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      console.log(data);
+    const port = chrome.runtime.connect({ name: 'knockknock' });
+    port.onMessage.addListener((data) => {
+      //const data = JSON.parse(event.data);
       const attention = data.attention || 0;
       const attentionRaw = data.attention_raw || 0;
-      const beta = data.betaHistory || 0;
+      const beta = data.beta || 0;
       this.setState({
         attention,
         attentionHistory: _.concat(this.state.attentionHistory, parseInt(attention, 10)),
@@ -41,13 +34,13 @@ export default class RealtimeAttentionChart extends Component {
         beta,
         betaHistory: _.concat(this.state.betaHistory, parseInt(beta, 10)),
       });
-    };
+    });
   }
 
 
   render() {
     const { attention, attentionRaw, beta, attentionHistory, 
-      attentionRawHistory, betaHistory 
+      attentionRawHistory, betaHistory,
     } = this.state;
     return (
       <section>
