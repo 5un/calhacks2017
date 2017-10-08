@@ -40,24 +40,24 @@ $(document).ready(function() {
     const origFontSize = parseInt($el.css('font-size'));
     // $el.css('font-size', (origFontSize * (1.0 + Math.random(1)) + 'px !important');
 
-    // $el.css('background-color', '#eeeeee');
-    // // Modify the elem only once
-    // if(!$el.data('original-style')) {
-    //   saveOriginalStyle($el);
+    $el.css('background-color', '#eeeeee');
+    // Modify the elem only once
+    if(!$el.data('original-style')) {
+      saveOriginalStyle($el);
 
-    //   $el.css('letter-spacing', '2px');
-    //   // $el.css('line-height', '120%');
-    //   $el.text($el.text().replace(/\s/g, '  '));
+      $el.css('letter-spacing', '2px');
+      // $el.css('line-height', '120%');
+      $el.text($el.text().replace(/\s/g, '  '));
 
-    //   if (isLargeTextChunk($el)) {
-    //     $el.css('background-color', 'yellow');
-    //     chapi.summarizeText($el.text().substring(0, 100), $el.text(), function (error, data) {
-    //       console.log('summarize');
-    //       console.log(data);
-    //       $el.text(data.sentences.join('\n\n'));
-    //     });
-    //   }
-    // }
+      if (isLargeTextChunk($el)) {
+        $el.css('background-color', 'yellow');
+        chapi.summarizeText($el.text().substring(0, 100), $el.text(), function (error, data) {
+          console.log('summarize');
+          console.log(data);
+          $el.text(data.summarizeResult.sentences.join('\n\n'));
+        });
+      }
+    }
   };
 
   $(window).scroll(function (event) {
