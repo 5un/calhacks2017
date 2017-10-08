@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'lodash'
+import { Button } from './Elements'
 
 export default class RealtimeAttentionChart extends Component {
 
@@ -22,7 +23,7 @@ export default class RealtimeAttentionChart extends Component {
     
     return (
       <footer>
-        <button onClick={this.handleDashboardButtonClicked.bind(this)}>Dashboard</button>
+        <Button onClick={this.handleDashboardButtonClicked.bind(this)}>Dashboard</Button>
       </footer>
     );
   }
